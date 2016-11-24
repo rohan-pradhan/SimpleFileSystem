@@ -1,19 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <memory.h>
 #include "sfs_api.h"
 #include "OpenFile.h"
 #include "disk_emu.h"
 #include "SuperBlock.h"
+#include "DataSize.h"
+#include "Directory.h"
+#include "FreeBitMap.h"
 
-#define SB_INDICIE 0
-#define INODE_INDICIE 1
-#define DIRECTORY_INDICIE 40
-#define DATA_INDICIE 50
-#define FREE_BIT_MAP_INDICIE 350
+
+
 #define FS "RohanPradhan.fs"
 
 superBlock theSuperBlock = {};
+INodeTable *theINodeTable = NULL;
+directoryCache *theDirectoryCache = NULL;
+openFileTable *theOpenFileTable = NULL;
+bitmapBlock *theBitMapBlock = NULL;
 
 
 void mksfs(int fresh){
@@ -25,21 +30,100 @@ void mksfs(int fresh){
       theSuperBlock.INodeTableLength= NUMBER_OF_INODES;
       theSuperBlock.FSSize = NUMBER_OF_BLOCKS;
       theSuperBlock.rootDirINodePointer = 0;
-
       write_blocks(SB_INDICIE, 1, &theSuperBlock);
-      printf("New disk!!!\n");
-      printf("%d",theSuperBlock.magicNumber);
 
+     //
+      if(theINodeTable == NULL) {
+          theINodeTable=calloc(1, sizeof(INodeTable));
+      }
+//      theINodeTable = malloc(sizeof(INodeTable));
+//      memset(theINodeTable, '\0', sizeof(INodeTable));
+      void *temporaryData;
+
+      temporaryData=calloc(1,calculateSizeNeeded(sizeof(INodeTable)));
+//      void *temporaryData = malloc((size_t) calculateSizeNeeded(sizeof(INodeTable)));
+//      memset(temporaryData, '\0', (size_t) calculateSizeNeeded(sizeof(INodeTable)) );
+
+//      printf("%d\n", sizeof(temporaryData));
+//      printf("%d\n", sizeof(theINodeTable));
+
+      memcpy(temporaryData, theINodeTable, sizeof(INodeTable));
+      write_blocks(INODE_INDICIE, calculateNumberOfBlocksNeeded(sizeof(INodeTable)), temporaryData);
+      free(temporaryData);
+
+      if (theDirectoryCache == NULL) {
+          theDirectoryCache = calloc(1, sizeof(directoryCache));
+      }
+
+      temporaryData = calloc(1,calculateSizeNeeded((sizeof(directoryCache))));
+      memcpy(temporaryData, theDirectoryCache, sizeof(directoryCache));
+      write_blocks(DIRECTORY_INDICIE, calculateNumberOfBlocksNeeded(sizeof(directoryCache)), temporaryData);
+      free(temporaryData);
+
+      if (theBitMapBlock == NULL) {
+          theBitMapBlock = calloc(1, sizeof(bitmapBlock));
+      }
+
+      temporaryData = calloc(1,calculateSizeNeeded(sizeof(bitmapBlock)));
+      memcpy(temporaryData, theBitMapBlock, sizeof(bitmapBlock));
+      write_blocks(DATA_INDICIE, calculateNumberOfBlocksNeeded((sizeof(bitmapBlock))), temporaryData);
+      free(temporaryData);
+
+
+      char *test="Feeeeeeeeeeeeeed.txt";
+      int testVar = validateFileName(test);
+      printf("%d\n", testVar);
 
 
   }
     else
-      read_blocks(SB_INDICIE,1,&theSuperBlock);
+      init_fresh_disk(FS, BLOCK_SIZE, NUMBER_OF_BLOCKS);
+    read_blocks(SB_INDICIE,1,&theSuperBlock);
+
+    if(theINodeTable == NULL) {
+        theINodeTable=calloc(1, sizeof(INodeTable));
+    }
+    void *temporaryData;
+    temporaryData = calloc(1,calculateSizeNeeded(sizeof(INodeTable)));
+    read_blocks(INODE_INDICIE, calculateNumberOfBlocksNeeded(sizeof(INodeTable)), temporaryData);
+    memcpy(theINodeTable,temporaryData, sizeof(INodeTable));
+    free(temporaryData);
+
+    if (theDirectoryCache == NULL) {
+        theDirectoryCache = calloc(1, sizeof(directoryCache));
+    }
+    temporaryData = calloc(1,calculateSizeNeeded(sizeof(directoryCache)));
+    read_blocks(DIRECTORY_INDICIE, calculateNumberOfBlocksNeeded(sizeof(directoryCache)), temporaryData);
+    memcpy(theDirectoryCache, temporaryData, sizeof(directoryCache));
+    free(temporaryData);
+
+    if (theBitMapBlock == NULL) {
+        theBitMapBlock = calloc(1, sizeof(bitmapBlock));
+    }
+    temporaryData = calloc(1,calculateSizeNeeded(sizeof(bitmapBlock)));
+    read_blocks(FREE_BIT_MAP_INDICIE, calculateNumberOfBlocksNeeded(sizeof(bitmapBlock)), temporaryData);
+    memcpy(theDirectoryCache, temporaryData, sizeof(bitmapBlock));
+    free(temporaryData);
+
+
+
     printf("Old disk1!!!");
     printf("%d", theSuperBlock.magicNumber);
 
 }
 int sfs_get_next_file_name(char *fname){
+    int indexOfCurrentPosistion = theDirectoryCache->posistionInDirectory;
+    int i =0;
+    while(indexOfCurrentPosistion+i < 40){
+        int adjustedIndex = indexOfCurrentPosistion+i;
+        if (checkIfPosistionInDirectoryIsUsed(theDirectoryCache,adjustedIndex)) {
+            strcpy(fname, theDirectoryCache->theDirectory[adjustedIndex].fileName);
+            return 1;
+        }
+        else
+            i++;
+    }
+    theDirectoryCache->posistionInDirectory = 0;
   return 0;
 }
 int sfs_get_file_size(char* path){
