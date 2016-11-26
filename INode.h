@@ -11,6 +11,9 @@
 #define CATCH } else {
 #define ETRY } }while(0)
 #define THROW longjmp(ex_buf__, 1)
+#include "BoolConstants.h"
+#include "FreeBitMap.h"
+#include "disk_emu.h"
 
 typedef struct inode {
     int mode;
@@ -21,6 +24,12 @@ typedef struct inode {
     unsigned iNodePointers[NUMBER_OF_INODE_DIRECT_POINTERS];
     unsigned indirectINodePointer;
 }INode;
+
+typedef struct inodeindirectpointer {
+    unsigned indirectPointers[NUMBER_OF_INODE_DIRECT_POINTERS];
+} INodeIndirectPointer;
+
+
 
 void copyINodeInformation(INode *original, INode *copy) {
     copy->mode = original->mode;
@@ -58,11 +67,70 @@ void setNewINode(INode* INodeToSetup) {
 
 typedef struct inodeTable {
     INode table[NUMBER_OF_INODES];
+    short usedTable[NUMBER_OF_INODES];
 
 } INodeTable;
 
 
+short checkIfPosistionInINodeTableIsOpen(INodeTable *table, int index) {
+    if(table->usedTable[index] == FALSE)
+        return TRUE;
+    else
+        return FALSE;
+}
 
+short checkIfPosistionInINodeTableIsUsed(INodeTable *table, int index){
+    if(table->usedTable[index] == TRUE)
+        return TRUE;
+    else
+        return FALSE;
+}
 
+int getIndexOfNextOpenSpotInINodeTable(INodeTable *table) {
+    int i;
+    for(i = 0; i < NUMBER_OF_INODES; i++) {
+        if(checkIfPosistionInINodeTableIsOpen(table,i) == TRUE)
+            return i;
+    }
+    return -1;
+
+}
+
+void setPosistionInInodeTableToOpen(INodeTable *table, int index) {
+    table->usedTable[index] = FALSE;
+}
+
+void setPosistionInInodeTableToUsed(INodeTable *table, int index) {
+    table->usedTable[index] = TRUE;
+}
+
+void eraseAllINodeBlockPointerData(INodeTable *theTable, bitmapBlock *thebitMapBlock, int index) {
+    int i;
+
+    for(i=0; i < NUMBER_OF_INODE_DIRECT_POINTERS; i++) {
+        if(theTable->table[index].iNodePointers[i] != NOT_DEFINED){
+            void *temporaryData = calloc(1, BLOCK_SIZE);
+            write_blocks(DATA_INDICIE+theTable->table[index].iNodePointers[i], 1, temporaryData);
+            free(temporaryData);
+            thebitMapBlock->block[theTable->table[index].iNodePointers[i]] = FALSE;
+            theTable->table[index].iNodePointers[i] = NOT_DEFINED;
+        }
+    }
+
+//   // INodeIndirectPointer *theIndirectPointer = NULL;
+//    //theIndirectPointer = (1, sizeof(INodeIndirectPointer));
+//    INodeIndirectPointer theIndirectPointer = {};
+//    //int x = theTable->table[index].indirectINodePointer;
+//    //printf("Value of indirect ptr: %d", x);
+//    read_blocks(DATA_INDICIE+theTable->table[index].indirectINodePointer, 1, &theIndirectPointer);
+//   // memcpy(theIndirectPointer, theTable->table[index].indirectINodePointer, sizeof(INodeIndirectPointer));
+//
+//    for(i=0; i< NUMBER_OF_INODE_DIRECT_POINTERS; i++) {
+//
+//    }
+
+    setPosistionInInodeTableToOpen(theTable, index);
+    setNewINode(&theTable->table[index]);
+}
 
 #endif //ASSIGNMENT_3_INODE_H

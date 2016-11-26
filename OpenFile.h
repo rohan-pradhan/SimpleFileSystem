@@ -44,24 +44,58 @@ int checkIfSlotIsInUse(openFileTable *fdTable, int tableIndex) {
     }
 }
 
-int SetSlotToInUse(openFileTable *fdTable, int index) {
-    if (index > MAX_NUMBER_OF_OPEN_FILES || index < 0)
-        return -1; //failed
-    else
-        fdTable->slotInformationTable[index]=IN_USE;
-        return 0; //successful
+int checkIfSlotIsNotInUse(openFileTable *fdTable, int tableIndex) {
+    if (fdTable->slotInformationTable[tableIndex] == NOT_IN_USE){
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
 }
 
-int SetSlotToNotInUse(openFileTable *fdTable, int index){
+void SetSlotInOpenFileTableToInUse(openFileTable *fdTable, int index) {
     if (index > MAX_NUMBER_OF_OPEN_FILES || index < 0)
-        return 1; //failed
+        return; //failed
     else
+        fdTable->slotInformationTable[index]=IN_USE;
+         //successful
+}
+
+void SetSlotInOpenFileTableToNotInUse(openFileTable *fdTable, int index){
+    if (index > MAX_NUMBER_OF_OPEN_FILES || index < 0)
+        return;
+    else {
         fdTable->table[index].INode = -1;
         fdTable->table[index].readPointer = -1;
         fdTable->table[index].writePointer = -1;
-        fdTable->slotInformationTable[index] = NOT_IN_USE;
-        return 0;
+        fdTable->slotInformationTable[index] = NOT_IN_USE; }
+      //  return 0;
 
+
+}
+
+short checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){
+    int i;
+    for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
+        if(fdTable->table[i].INode == someINode)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+short returnIndexOfINodeFromOpenFileTable(openFileTable *fdTable, int someINode) {
+    int i;
+    for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
+        if(fdTable->table[i].INode == someINode)
+            return i;
+    }
+    return NOT_DEFINED;
+}
+
+void removeDataFromSlotInOpenFileTable(openFileTable *fdTable, int index) {
+    fdTable->table[index].INode = NOT_DEFINED;
+    fdTable->table[index].readPointer = NOT_DEFINED;
+    fdTable->table[index].writePointer = NOT_DEFINED;
 }
 
 #endif //ASSIGNMENT_3_OPENFILE_H

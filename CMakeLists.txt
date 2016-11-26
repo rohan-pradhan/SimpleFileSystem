@@ -12,6 +12,6 @@ set(SOURCE_FILES
     sfs_test1.c
     sfs_test2.c
     tests.c
-    tests.h INode.h SuperBlock.h OpenFile.h DataSize.h Directory.h FreeBitMap.h)
+    tests.h INode.h SuperBlock.h OpenFile.h DataSize.h Directory.h FreeBitMap.h BoolConstants.h)
 
 add_executable(Assignment_3 ${SOURCE_FILES})

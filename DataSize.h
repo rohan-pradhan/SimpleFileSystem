@@ -9,8 +9,8 @@
 int calculateNumberOfBlocksNeeded(size_t input) {
    int returnVal;
     returnVal = (input + (BLOCK_SIZE-1))/BLOCK_SIZE;
-    printf("Input Blocks: %d\n", input);
-    printf("Output Blocks: %d\n", returnVal);
+//    printf("Input Blocks: %d\n", input);
+//    printf("Output Blocks: %d\n", returnVal);
 
     return returnVal;
 }
@@ -20,10 +20,14 @@ int calculateSizeNeeded(size_t input) {
     x = calculateNumberOfBlocksNeeded(input);
     int returnVal;
     returnVal = x * BLOCK_SIZE;
-    printf("Input Size: %d\n", input);
-    printf("Output Size: %d\n", returnVal);
+//    printf("Input Size: %d\n", input);
+//    printf("Output Size: %d\n", returnVal);
     return returnVal;
 
+}
+
+int calculateWhichBlock(int dataByte) {
+    return dataByte / BLOCK_SIZE;
 }
 
 

@@ -10,7 +10,7 @@
 #include "OpenFile.h"
 
 typedef struct directoryfile {
-    char fileName[COMBINED_FILE_LENGTH];
+    char fileName[COMBINED_FILE_LENGTH+1];
     int pointerToINode;
 } directoryFile;
 

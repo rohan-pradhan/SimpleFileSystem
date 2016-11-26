@@ -15,6 +15,7 @@
       <sourceFolder url="file://$MODULE_DIR$/tests.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/FreeBitMap.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/OpenFile.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BoolConstants.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sfs_test1.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sfs_test2.c" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/INode.h" isTestSource="false" />
