@@ -21,35 +21,56 @@ int simple_test(){
 
   //Init fresh file system
   mksfs(1);
-  //So now we should be able to open and close files ... 
+  //So now we should be able to open and close files ...
+  printf("\n 1 FildID[%d] = %d\n", 0, file_id[0]);
   test_open_new_files(file_names, file_id, num_file, &err_no);
+  printf("\n 2 FildID[%d] = %d\n", 0, file_id[0]);
   test_close_files(file_names, file_id, num_file, &err_no);
+  printf("\n 3 FildID[%d] = %d\n", 0, file_id[0]);
   //Reopen them after closing
   test_open_old_files(file_names, file_id, num_file, &err_no);
+  printf("\n 4 FildID[%d] = %d\n", 0, file_id[0]);
   //Now will attempt to write to file, very small chunk of text
   for(int i = 0; i < iterations; i++){
+    printf("\n 5a FildID[%d] = %d\n", 0, file_id[0]);
     test_simple_write_files(file_id, file_size, write_ptr, write_buf, num_file, &err_no);
+    printf("\n 5b FildID[%d] = %d\n", 0, file_id[0]);
     test_simple_read_files(file_id, file_size, write_buf, num_file, &err_no);
+    printf("\n 5c FildID[%d] = %d\n", 0, file_id[0]);
     test_read_all_files(file_id, file_size, write_buf, num_file, &err_no);
+    printf("\n 5d FildID[%d] = %d\n", 0, file_id[0]);
     if(i < iterations - 1) //Fun with frseek and fwseek
       test_seek(file_id, file_size, write_ptr, write_buf, num_file, 10, &err_no);
+     printf("\n 5e FildID[%d] = %d\n", 0, file_id[0]);
   }
   //test close + reading
+  printf("\n 6 FildID[%d] = %d\n", 0, file_id[0]);
   test_close_files(file_names, file_id, num_file, &err_no);
+  printf("\n 7 FildID[%d] = %d\n", 0, file_id[0]);
   test_open_old_files(file_names, file_id, num_file, &err_no);
+  printf("\n 8 FildID[%d] = %d\n", 0, file_id[0]);
   test_read_all_files(file_id, file_size, write_buf, num_file, &err_no);
+  printf("\n 9 FildID[%d] = %d\n", 0, file_id[0]);
 
   //testing Remove
   test_remove_files(file_id, file_size, write_ptr, file_names, write_buf, num_file, &err_no);
+  printf("\n 10 FildID[%d] = %d\n", 0, file_id[0]);
   free_name_element(file_names, num_file);
+  printf("\n 11 FildID[%d] = %d\n", 0, file_id[0]);
   //Make new files and attempt to write in again. 
   test_open_new_files(file_names, file_id, num_file, &err_no);
+  printf("\n 12 FildID[%d] = %d\n", 0, file_id[0]);
+  //printf("FileID: %d\n", file_id);
   test_simple_write_files(file_id, file_size, write_ptr, write_buf, num_file, &err_no);
+  printf("\n 13 FildID[%d] = %d\n", 0, file_id[0]);
   test_read_all_files(file_id, file_size, write_buf, num_file, &err_no);
+  printf("\n 14 FildID[%d] = %d\n", 0, file_id[0]);
   
   //test names + size
   test_get_file_name(file_names, num_file, &err_no);
+  printf("\n 15 FildID[%d] = %d\n", 0, file_id[0]);
   test_get_file_size(file_size, file_names, num_file, &err_no);
+  printf("\n 16 FildID[%d] = %d\n", 0, file_id[0]);
   
   printf("\n-------------------------------\nSimple test Finished.\nCurrent Error Num: %d\n--------------------------------\n\n", err_no);
 

@@ -21,8 +21,8 @@ typedef struct inode {
     int uid;
     int gid;
     int size;
-    unsigned iNodePointers[NUMBER_OF_INODE_DIRECT_POINTERS];
-    unsigned indirectINodePointer;
+    int iNodePointers[NUMBER_OF_INODE_DIRECT_POINTERS];
+    int indirectINodePointer;
 }INode;
 
 typedef struct inodeindirectpointer {
@@ -92,7 +92,7 @@ int getIndexOfNextOpenSpotInINodeTable(INodeTable *table) {
         if(checkIfPosistionInINodeTableIsOpen(table,i) == TRUE)
             return i;
     }
-    return -1;
+    return NOT_DEFINED;
 
 }
 
@@ -131,6 +131,14 @@ void eraseAllINodeBlockPointerData(INodeTable *theTable, bitmapBlock *thebitMapB
 
     setPosistionInInodeTableToOpen(theTable, index);
     setNewINode(&theTable->table[index]);
+}
+
+short checkIfDataPointerIsEmptyInINode(INodeTable *someINodeTable, int indexInTable, int dataPointerInINode){
+    if (someINodeTable->table[indexInTable].iNodePointers[dataPointerInINode] <0){
+        return TRUE;
+    }
+    else
+        return FALSE;
 }
 
 #endif //ASSIGNMENT_3_INODE_H

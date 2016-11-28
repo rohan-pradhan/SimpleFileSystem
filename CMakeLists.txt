@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES
     disk_emu.c
     disk_emu.h
-    fuse_wrappers.c
+    #   fuse_wrappers.c
     sfs_api.c
     sfs_api.h
     sfs_test1.c

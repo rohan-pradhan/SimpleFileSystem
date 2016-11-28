@@ -98,8 +98,13 @@ int test_read_all_files(int *file_id, int *file_size, char **write_buf, int num_
     if(strcmp(buf, write_buf[i]) != 0){
       fprintf(stderr, "Error: \nRead failed.\n\n");
       *err_no += 1;
-      printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
+//        printf("Should have read: %s\n", write_buf[i]);
+//        printf("Actually read: %s\n", buf);
+//      printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
     }
+      printf("Should have read all: %s\n", write_buf[i]);
+      printf("Actually read all: %s\n", buf);
+      printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
   }
   free(buf);
   printf("\n-------------------------------\nTest_num[%d]: Current Error Num: %d\n--------------------------------\n\n", test_num, *err_no);
@@ -123,6 +128,9 @@ int test_simple_read_files(int *file_id, int *file_size, char **write_buf, int n
       fprintf(stderr, "Error: \nRead failed. Read:\n%s\nShould have Read:\n%s\n", buf, test_str);
       *err_no += 1;
     }
+      printf("This is what simple read should have read: %s\n", test_str);
+      printf("This is what simple read actually read: %s\n", buf);
+      printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
   }
   printf("\n-------------------------------\nTest_num[%d]: Current Error Num: %d\n--------------------------------\n\n", test_num, *err_no);
   test_num++;
@@ -140,7 +148,9 @@ int test_simple_write_files(int *file_id, int *file_size, int *write_ptr, char *
     write_ptr[i] += strlen(test_str);
     if(write_ptr[i] > file_size[i])
       file_size[i] = write_ptr[i];
-    write_buf[i][file_size[i]] = '\0'; 
+    write_buf[i][file_size[i]] = '\0';
+      printf("\nAddress of FileID[0] = %d\n", &(file_id[0]));
+      printf("\nFildID[%d] = %d\n", i, file_id[i]);
     res = sfs_fwrite(file_id[i], test_str, strlen(test_str));
     if(res != strlen(test_str))
       fprintf(stderr, "Warning: sfs_fwrite should return number of bytes written. Potential write fail?\n");
@@ -670,7 +680,9 @@ int test_open_old_files(char **file_names, int *file_id, int num_file, int *err_
   if(num_file < 1)
     return 0;
   //We don't generate new file names but same as above
+    printf("\nBingo Pre open!!! %d\n", file_id[0]);
   file_id[0] = sfs_fopen(file_names[0]);
+  printf("\nBingo Post open!!! %d\n", file_id[0]);
   printf("File Opened %s\n", file_names[0]);
   if (file_id[0] < 0) {
     fprintf(stderr, "ERROR: Cannot open file %s\n", file_names[0]);
