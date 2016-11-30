@@ -60,19 +60,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DataSize.h" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DataSize.h" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/DataSize.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1155">
-              <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
+            <state relative-caret-position="270">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="74" selection-end-column="3" />
               <folding>
                 <element signature="e#112#131#0" expanded="true" />
+                <marker date="1480544252000" expanded="true" signature="1845:2513" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sfs_api.c" pinned="false" current-in-tab="true">
+      <file leaf-file-name="sfs_api.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sfs_api.c">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="673">
@@ -144,7 +145,6 @@
       <list>
         <option value="$PROJECT_DIR$/OpenFileTable.h" />
         <option value="$PROJECT_DIR$/BoolConstants.h" />
-        <option value="$PROJECT_DIR$/DataSize.h" />
         <option value="$PROJECT_DIR$/FreeBitMap.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/disk_emu.c" />
@@ -157,6 +157,7 @@
         <option value="$PROJECT_DIR$/OpenFile.h" />
         <option value="$PROJECT_DIR$/tests.c" />
         <option value="$PROJECT_DIR$/sfs_api.c" />
+        <option value="$PROJECT_DIR$/DataSize.h" />
       </list>
     </option>
   </component>
@@ -386,12 +387,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1479838175964</updated>
-      <workItem from="1479838177347" duration="139415000" />
+      <workItem from="1479838177347" duration="139561000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139415000" />
+    <option name="totallyTimeSpent" value="139561000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="99" y="0" width="1171" height="872" extended-state="0" />
@@ -576,16 +577,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataSize.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1155">
-          <caret line="77" column="32" selection-start-line="77" selection-start-column="32" selection-end-line="77" selection-end-column="32" />
-          <folding>
-            <element signature="e#112#131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/OpenFile.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -643,6 +634,17 @@
           <caret line="432" column="4" selection-start-line="432" selection-start-column="4" selection-end-line="432" selection-end-column="4" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataSize.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="74" selection-end-column="3" />
+          <folding>
+            <element signature="e#112#131#0" expanded="true" />
+            <marker date="1480544252000" expanded="true" signature="1845:2513" ph="{...}" />
           </folding>
         </state>
       </provider>
