@@ -14,14 +14,16 @@
 
 #define FS "RohanPradhan.fs"
 
-superBlock theSuperBlock = {};
+
 INodeTable *theINodeTable = NULL;
 directoryCache *theDirectoryCache = NULL;
 openFileTable *theOpenFileTable = NULL;
 bitmapBlock *theBitMapBlock = NULL;
+unsigned superBlock1[256];
 
 
 void mksfs(int fresh){
+    //superBlock theSuperBlock = {};
     printf("\n \n *** Beginning Make FS *** \n \n");
     theOpenFileTable = calloc(1,sizeof(openFileTable));
     for(int i =0; i<MAX_NUMBER_OF_OPEN_FILES; i++) {
@@ -30,12 +32,18 @@ void mksfs(int fresh){
   if (fresh ==1){
         remove(FS);
       init_fresh_disk(FS, BLOCK_SIZE, NUMBER_OF_BLOCKS);
-      theSuperBlock.magicNumber= rand();
-      theSuperBlock.blockSize = BLOCK_SIZE;
-      theSuperBlock.INodeTableLength= NUMBER_OF_INODES;
-      theSuperBlock.FSSize = NUMBER_OF_BLOCKS;
-      theSuperBlock.rootDirINodePointer = 0;
-      write_blocks(SB_INDICIE, 1, &theSuperBlock);
+//      theSuperBlock.magicNumber= rand();
+//      theSuperBlock.blockSize = BLOCK_SIZE;
+//      theSuperBlock.INodeTableLength= NUMBER_OF_INODES;
+//      theSuperBlock.FSSize = NUMBER_OF_BLOCKS;
+//      theSuperBlock.rootDirINodePointer = 0;
+//      write_blocks(SB_INDICIE, 1, &theSuperBlock);
+        superBlock1[0]=rand();
+        superBlock1[1]=BLOCK_SIZE;
+        superBlock1[2]=NUMBER_OF_INODES;
+        superBlock1[3]=NUMBER_OF_BLOCKS;
+        superBlock1[4]= 0;
+        write_blocks(0,1, superBlock1);
 
      //
       free(theINodeTable);
@@ -84,14 +92,13 @@ void mksfs(int fresh){
   }
     else {
       init_disk(FS, BLOCK_SIZE, NUMBER_OF_BLOCKS);
+      read_blocks(0,1,superBlock1);
 
       int numberBitMapBlocks = DATA_INDICIE - FREE_BIT_MAP_INDICIE;
       char bitMapBlockRestore[BLOCK_SIZE * numberBitMapBlocks];
       read_blocks(FREE_BIT_MAP_INDICIE, numberBitMapBlocks, bitMapBlockRestore);
       memcpy(theBitMapBlock, bitMapBlockRestore, sizeof(theBitMapBlock));
-
-
-
+      
 
 //
 
