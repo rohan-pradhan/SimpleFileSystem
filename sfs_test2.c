@@ -69,8 +69,20 @@ int difficult_test(){
   }  
 
   test_read_all_files(file_id, file_size, write_buf, num_file, &err_no);
-  //Recreate the file system but stale. 
+  //Recreate the file system but stale.
+    printf("Fucks shit up....\n");
+    char buf[100];
+    sfs_frseek(file_id[0], 0);
+    sfs_fread(file_id[0],buf, 100);
+    printf("buf before mkfs: %s\n", buf);
+    //free(buf);
   mksfs(0);
+    sfs_fopen("FINAL_ANSWERS.pdf");
+    char buf2[100];
+    sfs_frseek(file_id[0], 0);
+    sfs_fread(file_id[0],buf2, 100);
+    printf("buf before mkfs: %s\n", buf2);
+//    free(buf2);
   test_open_old_files(file_names, file_id, num_file, &err_no);
   //More heavy random access memory reads
   for(int i = 0; i < iterations; i++){

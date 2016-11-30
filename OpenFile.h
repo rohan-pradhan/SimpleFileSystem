@@ -28,7 +28,11 @@ typedef struct openfiletable{
 int getNextOpenSpotInFileDescriptorTable(openFileTable * fdTable){
 
     for (int i =0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
+        printf("%d\n", i);
+        printf("fdtable: kk %d\n", fdTable);
+
         if (fdTable->slotInformationTable[i] == NOT_IN_USE)
+
             return i;
     }
     return -1; // Means there are no free file descriptors in the table
@@ -83,20 +87,20 @@ short checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){
     return FALSE;
 }
 
-int returnIndexOfINodeFromOpenFileTable(openFileTable fdTable, int someINode) {
-    int i;
-    for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
-//        printf("The someInode is: %d\n", someINode);
-//        printf("The Inode in table is: %d\n", fdTable.table[i].INode);
-        //int testVal = fdTable.table[i].INode;
-        if(fdTable.table[i].INode == someINode); {
-            //printf("value of testval = %d and value of someInode = %d\n",testVal, someINode);
-            //printf("Going to return now!\n");
-            return i;
-        }
-    }
-    return -1;
-}
+//int returnIndexOfINodeFromOpenFileTable(openFileTable fdTable, int someINode) {
+//    int i;
+//    for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
+////        printf("The someInode is: %d\n", someINode);
+////        printf("The Inode in table is: %d\n", fdTable.table[i].INode);
+//        //int testVal = fdTable.table[i].INode;
+//        if(fdTable.table[i].INode == someINode); {
+//            //printf("value of testval = %d and value of someInode = %d\n",testVal, someINode);
+//            //printf("Going to return now!\n");
+//            return i;
+//        }
+//    }
+//    return -1;
+//}
 
 
 int getIndexOfOpenFileTableForINode(openFileTable table, int iNodeIndex) {

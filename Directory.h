@@ -16,8 +16,8 @@ typedef struct directoryfile {
 
 typedef struct directorycache {
     directoryFile theDirectory[40];
-    short fileUsed[40];
-    short posistionInDirectory;
+    int fileUsed[40];
+    int posistionInDirectory;
 
 } directoryCache;
 

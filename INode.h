@@ -5,12 +5,16 @@
 #ifndef ASSIGNMENT_3_INODE_H
 #define ASSIGNMENT_3_INODE_H
 #include <setjmp.h>
+#include "SuperBlock.h"
 #define NUMBER_OF_INODE_DIRECT_POINTERS 12
+
+
 #define NUMBER_OF_INODES 40
 #define TRY do{ jmp_buf ex_buf__; if( !setjmp(ex_buf__) ){
 #define CATCH } else {
 #define ETRY } }while(0)
 #define THROW longjmp(ex_buf__, 1)
+static const int NUMBER_OF_INODE_INDIRECT_POINTERS = BLOCK_SIZE / sizeof(int);
 #include "BoolConstants.h"
 #include "FreeBitMap.h"
 #include "disk_emu.h"
@@ -25,9 +29,9 @@ typedef struct inode {
     int indirectINodePointer;
 }INode;
 
-typedef struct inodeindirectpointer {
-    unsigned indirectPointers[NUMBER_OF_INODE_DIRECT_POINTERS];
-} INodeIndirectPointer;
+typedef struct indirectblock {
+    int indirectPointers[NUMBER_OF_INODE_DIRECT_POINTERS];
+} indirectBlock;
 
 
 
@@ -42,10 +46,6 @@ void copyINodeInformation(INode *original, INode *copy) {
     }
     copy->indirectINodePointer = original->indirectINodePointer;
  }
-
-
-
-
 
 
 void setNewINode(INode* INodeToSetup) {
@@ -63,7 +63,6 @@ void setNewINode(INode* INodeToSetup) {
     INodeToSetup->indirectINodePointer = -1;
 
 }
-
 
 typedef struct inodeTable {
     INode table[NUMBER_OF_INODES];
@@ -139,6 +138,46 @@ short checkIfDataPointerIsEmptyInINode(INodeTable *someINodeTable, int indexInTa
     }
     else
         return FALSE;
+}
+
+int checkIfPointerIsInIndirectBlock(int index) {
+    if (index >= NUMBER_OF_INODE_DIRECT_POINTERS)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+int calculateWhichIndirectBlock(int index) {
+    if (checkIfPointerIsInIndirectBlock(index) == FALSE)
+        return -1;
+    else
+        return index - NUMBER_OF_INODE_DIRECT_POINTERS;
+}
+
+int checkIfPointerToIndirectBlockIsEmpty(INodeTable *someINodeTable, int indexInTable) {
+    if(someINodeTable->table[indexInTable].indirectINodePointer < 1) {
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
+int checkIfIndirectDataPointerIsEmpty(indirectBlock *someIndirectBlock, int indexInTable){
+    if(someIndirectBlock->indirectPointers[indexInTable] < 1 ){
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
+
+int testForStackCorruption(indirectBlock *someIndirectBlock, int indexInTable){
+    if(someIndirectBlock->indirectPointers[indexInTable] > NUMBER_OF_BLOCKS) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
 }
 
 #endif //ASSIGNMENT_3_INODE_H

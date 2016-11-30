@@ -233,6 +233,7 @@ Difficult Write. Will large single file writes randomly.
 This will end up shifting the read pointer to location of current write pointer. 
 */
 int test_difficult_write_files(int *file_id, int *file_size, int *write_ptr, char **write_buf, int num_file, int *err_no){
+    printf("Entering Difficult Write! \n \n");
   int res;
   char *text;
   int rand_offset;
@@ -293,6 +294,7 @@ Attempts to fill up all the files to max.
 This should return an error at the end. 
 */
 int test_write_to_overflow(int *file_id, int *file_size, char **write_buf, int index, int *err_no){
+    printf("Writing to overflow\n");
   char * text;
   int res;
   int i = index;
@@ -681,6 +683,7 @@ int test_open_old_files(char **file_names, int *file_id, int num_file, int *err_
     return 0;
   //We don't generate new file names but same as above
     printf("\nBingo Pre open!!! %d\n", file_id[0]);
+    printf("File we are tyring to open is: %s\n", file_names[0]);
   file_id[0] = sfs_fopen(file_names[0]);
   printf("\nBingo Post open!!! %d\n", file_id[0]);
   printf("File Opened %s\n", file_names[0]);
