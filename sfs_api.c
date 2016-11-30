@@ -85,49 +85,42 @@ void mksfs(int fresh){
     else {
       init_disk(FS, BLOCK_SIZE, NUMBER_OF_BLOCKS);
 
-      int numberBitMapBlocks = DATA_INDICIE-FREE_BIT_MAP_INDICIE;
-      char bitMapBlockRestore[BLOCK_SIZE*numberBitMapBlocks];
-      read_blocks(FREE_BIT_MAP_INDICIE,numberBitMapBlocks,bitMapBlockRestore);
+      int numberBitMapBlocks = DATA_INDICIE - FREE_BIT_MAP_INDICIE;
+      char bitMapBlockRestore[BLOCK_SIZE * numberBitMapBlocks];
+      read_blocks(FREE_BIT_MAP_INDICIE, numberBitMapBlocks, bitMapBlockRestore);
       memcpy(theBitMapBlock, bitMapBlockRestore, sizeof(theBitMapBlock));
 
 
 
 
 //
-//////      free(theINodeTable);
-//////      theINodeTable = NULL;
-////    if(theINodeTable == NULL) {
-////        theINodeTable=calloc(1, sizeof(INodeTable));
-////    }
-//    void *temporaryData;
-////    temporaryData = calloc(1,calculateSizeNeeded(sizeof(INodeTable)));
-////    read_blocks(INODE_INDICIE, calculateNumberOfBlocksNeeded(sizeof(INodeTable)), temporaryData);
-////    memcpy(theINodeTable,temporaryData, sizeof(INodeTable));
-////      printf("After read: %d\n", theINodeTable->table[0].size);
-////    free(temporaryData);
-////
-////    if (theDirectoryCache == NULL) {
-////        theDirectoryCache = calloc(1, sizeof(directoryCache));
-////    }
-//      printf("Size of directory cache: %d\n", sizeof(directoryCache));
-//    temporaryData = calloc(1,calculateSizeNeeded(sizeof(directoryCache)));
-//    read_blocks(DIRECTORY_INDICIE, calculateNumberOfBlocksNeeded(sizeof(directoryCache)), temporaryData);
-//    memcpy(theDirectoryCache, temporaryData, sizeof(directoryCache));
-//    //free(temporaryData);
-//////
-////    if (theBitMapBlock == NULL) {
-////        theBitMapBlock = calloc(1, sizeof(bitmapBlock));
-////    }
-////    temporaryData = calloc(1,calculateSizeNeeded(sizeof(bitmapBlock)));
-////    read_blocks(FREE_BIT_MAP_INDICIE, calculateNumberOfBlocksNeeded(sizeof(bitmapBlock)), temporaryData);
-////    memcpy(theBitMapBlock, temporaryData, sizeof(bitmapBlock));
-//    free(temporaryData);
+
+      void *temporaryData;
+      temporaryData = calloc(1, calculateSizeNeeded(sizeof(INodeTable)));
+      read_blocks(INODE_INDICIE, calculateNumberOfBlocksNeeded(sizeof(INodeTable)), temporaryData);
+      memcpy(theINodeTable, temporaryData, sizeof(INodeTable));
+      printf("After read: %d\n", theINodeTable->table[0].size);
+      free(temporaryData);
+
+      if (theDirectoryCache == NULL) {
+          theDirectoryCache = calloc(1, sizeof(directoryCache));
+      }
+      printf("Size of directory cache: %d\n", sizeof(directoryCache));
+      temporaryData = calloc(1, calculateSizeNeeded(sizeof(directoryCache)));
+      read_blocks(DIRECTORY_INDICIE, calculateNumberOfBlocksNeeded(sizeof(directoryCache)), temporaryData);
+      memcpy(theDirectoryCache, temporaryData, sizeof(directoryCache));
+      free(temporaryData);
+//
+      if (theBitMapBlock == NULL) {
+          theBitMapBlock = calloc(1, sizeof(bitmapBlock));
+      }
+      temporaryData = calloc(1, calculateSizeNeeded(sizeof(bitmapBlock)));
+      read_blocks(FREE_BIT_MAP_INDICIE, calculateNumberOfBlocksNeeded(sizeof(bitmapBlock)), temporaryData);
+      memcpy(theBitMapBlock, temporaryData, sizeof(bitmapBlock));
+      free(temporaryData);
 
   }
 
-//    printf("Old disk1!!!");
-//    printf("%d", theSuperBlock.magicNumber);
-    printf("fdtable jj: %d\n", theOpenFileTable);
 }
 int sfs_get_next_file_name(char *fname){
     int indexOfCurrentPosistion = theDirectoryCache->posistionInDirectory;
@@ -185,72 +178,7 @@ int sfs_get_file_size(char* path){
 }
 int sfs_fopen(char *name){
    printf("\n -----Beginning the Open Function ------ \n");
-//    printf("The name we are opening is: %s\n", name);
-//    if (validateFileName(name) == FALSE) {
-//        return -1;
-//    }
-//    else {
-//        int indexOfFile = findIndexOfFileInDirectory(theDirectoryCache, name);
-//        if (indexOfFile == NOT_DEFINED) {
-//            int indexOfNextOpenSpotInINodeTable = getIndexOfNextOpenSpotInINodeTable(theINodeTable);
-//            int indexOfNextOpenSpotInFileDescriptorTable = getNextOpenSpotInFileDescriptorTable(theOpenFileTable);
-//            int indexOfNextOpenSpotInDirectoryCache = getIndexOfNextOpenSpotInDirectory(theDirectoryCache);
-//            //  printf("\n INDEX OF DIRCACHE :%d\n", indexOfNextOpenSpotInDirectoryCache);
-//            if (indexOfNextOpenSpotInFileDescriptorTable == -1 || indexOfNextOpenSpotInINodeTable == -1 ||
-//                indexOfNextOpenSpotInDirectoryCache == -1) {
-//                return -1; // no open spaces in one of the tables
-//            } else {
-//                markSpecificPosistionInDirectoryAsUsed(theDirectoryCache, indexOfNextOpenSpotInDirectoryCache);
-////                char* testName = calloc(1, sizeof(name)*strlen(name));
-////                memcpy(testName, name,sizeof(name)*strlen(name));
-////                printf("\n the name is: %s", testName);
-//                //memcpy(theDirectoryCache->theDirectory[indexOfNextOpenSpotInDirectoryCache].fileName, name, sizeof(name) * strlen(name));
-//                strcpy(theDirectoryCache->theDirectory[indexOfNextOpenSpotInDirectoryCache].fileName, name);
-//                theDirectoryCache->theDirectory[indexOfNextOpenSpotInDirectoryCache].pointerToINode = NOT_DEFINED;
-//                printf("\n the name copied into directory cache is: %s \n",
-//                       theDirectoryCache->theDirectory[indexOfNextOpenSpotInDirectoryCache].fileName);
-//
-//                printf("\n the name copied into inode cache is: %d \n",
-//                       theDirectoryCache->theDirectory[indexOfNextOpenSpotInDirectoryCache].pointerToINode);
-//                indexOfFile = indexOfNextOpenSpotInDirectoryCache;
-//
-//            }
-//        }
-//            int thePointerToInode = theDirectoryCache->theDirectory[indexOfFile].pointerToINode;
-//            if(thePointerToInode == NOT_DEFINED) {
-//                if (getIndexOfNextOpenSpotInINodeTable(theINodeTable) == NOT_DEFINED)
-//                    return NOT_DEFINED;
-//                else {
-//                    thePointerToInode = getIndexOfNextOpenSpotInINodeTable(theINodeTable);
-//                    setPosistionInInodeTableToUsed(theINodeTable, thePointerToInode);
-//                    setNewINode(&theINodeTable->table[thePointerToInode]);
-//                    theDirectoryCache->theDirectory[indexOfFile].pointerToINode = thePointerToInode;
-//
-//                }
-//            }
-//            int indexInOpenFileDescriptorTable = returnIndexOfINodeFromOpenFileTable(theOpenFileTable, thePointerToInode);
-//               if(checkIfINodeIsInOpenFileTable(theOpenFileTable,thePointerToInode) == FALSE) {
-//                    //if (indexInOpenFileDescriptorTable == -1){
-//                    indexInOpenFileDescriptorTable = getNextOpenSpotInFileDescriptorTable(theOpenFileTable);
-//                    SetSlotInOpenFileTableToInUse(theOpenFileTable, indexInOpenFileDescriptorTable);
-//                    printf("Slot closed in FTable: %d\n", indexInOpenFileDescriptorTable);
-//                    theOpenFileTable->table[indexInOpenFileDescriptorTable].INode = thePointerToInode;
-//                    //printf("abaadfasdf %d\n", theOpenFileTable->table[indexInOpenFileDescriptorTable].INode);
-//                    theOpenFileTable->table[indexInOpenFileDescriptorTable].readPointer = 0;
-//                    theOpenFileTable->table[indexInOpenFileDescriptorTable].writePointer = theINodeTable->table[thePointerToInode].size;
-//
-//                }
-//                else {
-//                   // printf("Index A = %d\n", indexInOpenFileDescriptorTable);
-//                    //indexInOpenFileDescriptorTable = returnIndexOfINodeFromOpenFileTable(theOpenFileTable, thePointerToInode);
-//                    //printf("Index B = %d\n", indexInOpenFileDescriptorTable);
-//                    SetSlotInOpenFileTableToInUse(theOpenFileTable, indexOfFile);
-//                    printf("Slot closed in FTable %d \n", indexOfFile);
-//                }
-//
-//            printf("\n The position in the Directory Cache (ie. fileID) is: %d\n", indexOfFile);
-//            return indexInOpenFileDescriptorTable;
-//            }
+
     if (validateFileName(name) == FALSE){
         return -1;
     }
@@ -315,13 +243,6 @@ int sfs_fopen(char *name){
 
     }
 
-
-
-
-
-
-
-  //return 0;
 }
 int sfs_fclose(int fileID){
     printf("\n -----Beginning the Close Function ------ \n");
@@ -343,6 +264,8 @@ int sfs_fclose(int fileID){
 
   return 0;
 }
+
+
 int sfs_frseek(int fileID, int loc){
     printf("\n***Beginning Read Seek***\n");
     printf("FileID We are Read Seeking: %d\n", fileID);
@@ -360,6 +283,7 @@ int sfs_frseek(int fileID, int loc){
 }
 
 int sfs_fwseek(int fileID, int loc){
+    printf("\n***Beginning Write Seek***\n");
     //printf("\n \n TRYING TO SEEK WRITE to location: %d \n \n", loc);
     if (loc < 0)
         return -1;
@@ -369,6 +293,8 @@ int sfs_fwseek(int fileID, int loc){
     return 0;
 
 }
+
+
 int sfs_fwrite(int fileID, char *buf, int length){
 
     printf("\n \n -----Beginning Write------\n");
@@ -382,6 +308,9 @@ int sfs_fwrite(int fileID, char *buf, int length){
 
     int bytesToWrite = length;
     //printf("Bytestowrite = %d\n", bytesToWrite);
+    if (checkIfFileIDIsOpen(theOpenFileTable, fileID) == FALSE) {
+        return -1;
+    }
 
     int INodeIndex = theOpenFileTable->table[fileID].INode;
     printf("The INodeIndex For this write is: %d\n", INodeIndex);
@@ -390,7 +319,7 @@ int sfs_fwrite(int fileID, char *buf, int length){
     temporaryDiskData = calloc(1, BLOCK_SIZE);
 
     indirectBlock *theIndirectBlock; // *******RPCHANGE*********
-    theIndirectBlock = calloc(1, NUMBER_OF_INODE_INDIRECT_POINTERS* sizeof(int));
+    theIndirectBlock = calloc(1, (NUMBER_OF_INODE_INDIRECT_POINTERS* sizeof(int)));
 
     int initialWritePointer = theOpenFileTable->table[fileID].writePointer;
 
@@ -425,47 +354,36 @@ int sfs_fwrite(int fileID, char *buf, int length){
 
         printf("\n**Entering the while loop!**\n");
 
-        int PosistionOfWritePointer = theOpenFileTable->table[fileID].writePointer;
+
+        int PosistionOfWritePointer = initialWritePointer;
 
         printf("Posistion of write poitner in loop: %d\n", PosistionOfWritePointer);
 
-//        printf("The Size of Indirect block is: %d\n", sizeof(indirectBlock));
-//        printf("The Size of Number of Indirect Block Pointers is: %d\n", NUMBER_OF_INODE_INDIRECT_POINTERS);
-//        printf("The size of int is: %d\n", sizeof(int));
-      //  printf("1\n");
-        //printf("\nThe starting posistion of the WritePointer is: %d \n", PosistionOfWritePointer);
         int blockNumberInINode = calculateWhichBlock(PosistionOfWritePointer);
-        printf("The BlockNumber in Inode is: %d \n", blockNumberInINode);
-       // printf("2\n");
-        int posistionInBlock = calculateWhereInBlock(PosistionOfWritePointer);
-        //printf("3\n");
-        int amountThatCanBeWrittenInSingleIteration;
-       // printf("4\n");
 
+
+        int posistionInBlock = calculateWhereInBlock(PosistionOfWritePointer);
+
+        int amountThatCanBeWrittenInSingleIteration;
 
 
         if(bytesToWrite > (BLOCK_SIZE - posistionInBlock)){
-            //printf("5\n");
+
             amountThatCanBeWrittenInSingleIteration = BLOCK_SIZE - posistionInBlock;
-            //printf("6\n");
+
         }
         else {
-            //printf("7\n");
+
             amountThatCanBeWrittenInSingleIteration = bytesToWrite;
-            //printf("8\n");
         }
-
-
-
 
 
         int newBlockCreatedFlag = FALSE;
-        //printf("9\n");
+
         int pointerToDisk;
-       // printf("10\n");
-        // IMPLEMENT INDIRECT POINTER
 
         if(checkIfPointerIsInIndirectBlock(blockNumberInINode) == TRUE) {
+
             int blockInIndirect = calculateWhichIndirectBlock(blockNumberInINode);
             if (checkIfIndirectDataPointerIsEmpty(theIndirectBlock, blockInIndirect) == TRUE){
                 newBlockCreatedFlag = TRUE;
@@ -478,46 +396,41 @@ int sfs_fwrite(int fileID, char *buf, int length){
                 printf("Simi error: %d\n", theIndirectBlock->indirectPointers[blockInIndirect]);
 
             }
-            //pointerToDisk = theIndirectBlock->indirectPointers[blockInIndirect];
 
-            //if()
         } else {
 
         if (checkIfDataPointerIsEmptyInINode(theINodeTable, INodeIndex, blockNumberInINode) == TRUE){
            // printf("11\n");
-            printf("Data pointer in inode: %d", theINodeTable->table[INodeIndex].iNodePointers[blockNumberInINode]);
+          //  printf("Data pointer in inode: %d", theINodeTable->table[INodeIndex].iNodePointers[blockNumberInINode]);
             newBlockCreatedFlag = TRUE;
            // printf("12\n");
             pointerToDisk = findFreeBit(theBitMapBlock);
-            printf("\nPointer to disk found: %d\n\n", pointerToDisk );
+           // printf("\nPointer to disk found: %d\n\n", pointerToDisk );
             //printf("13\n");
-            printf("Pointer to disk: %d\n",pointerToDisk);
+         //   printf("Pointer to disk: %d\n",pointerToDisk);
             if (pointerToDisk < 0) {
                 break;
             }
             theBitMapBlock->block[pointerToDisk] = IN_USE;
             theINodeTable->table[INodeIndex].iNodePointers[blockNumberInINode] = pointerToDisk;
         } }
-       // printf("11b\n");
+
 
         if(newBlockCreatedFlag == FALSE) {
-          //  printf("12a\n");
-//            void *copyDiskData;
-//            copyDiskData = calloc(1, BLOCK_SIZE);
+
             pointerToDisk = theINodeTable->table[INodeIndex].iNodePointers[blockNumberInINode];
-           // printf("DATA INDICIE = %d\n", DATA_INDICIE);
             printf("Pointer To disk (block not new) = %d\n", pointerToDisk);
             read_blocks(DATA_INDICIE + pointerToDisk, 1, temporaryDiskData);
 
         }
-      //  printf("11c\n");
+
 
         memcpy(temporaryDiskData+posistionInBlock, buf, (size_t) amountThatCanBeWrittenInSingleIteration);
         printf("What buf is copying: %s\n", temporaryDiskData);
 
         write_blocks(DATA_INDICIE+pointerToDisk,1,temporaryDiskData);
 
-        theOpenFileTable->table[fileID].writePointer += amountThatCanBeWrittenInSingleIteration;
+            initialWritePointer += amountThatCanBeWrittenInSingleIteration;
 
 
         bytesWrittenCounter += amountThatCanBeWrittenInSingleIteration;
@@ -525,45 +438,15 @@ int sfs_fwrite(int fileID, char *buf, int length){
         buf += amountThatCanBeWrittenInSingleIteration;
         printf("writePointer location = %d\n", theOpenFileTable->table[fileID].writePointer );
 
-        if(theOpenFileTable->table[fileID].writePointer > theINodeTable->table[INodeIndex].size) {
-            theINodeTable->table[INodeIndex].size = theOpenFileTable->table[fileID].writePointer;
-           printf("INodeSize = %d\n", theINodeTable->table[INodeIndex].size );
+
+        if(initialWritePointer > theINodeTable->table[INodeIndex].size) {
+            theINodeTable->table[INodeIndex].size = initialWritePointer;
+            printf("INodeSize = %d\n", theINodeTable->table[INodeIndex].size );
         }
 
     }
     free(temporaryDiskData);
 
-
-
-
-//         **** IMPLEMENT INDDIRECT FILE POINTERS *********
-
-
-//        if(theINodeTable == NULL) {
-//            theINodeTable=calloc(1, sizeof(INodeTable));
-//        }
-//        void *temporaryData;
-//        temporaryData = calloc(1,calculateSizeNeeded(sizeof(INodeTable)));
-//        write_blocks()
-//        read_blocks(INODE_INDICIE, calculateNumberOfBlocksNeeded(sizeof(INodeTable)), temporaryData);
-//        memcpy(theINodeTable,temporaryData, sizeof(INodeTable));
-//        free(temporaryData);
-//
-//        if (theDirectoryCache == NULL) {
-//            theDirectoryCache = calloc(1, sizeof(directoryCache));
-//        }
-//        temporaryData = calloc(1,calculateSizeNeeded(sizeof(directoryCache)));
-//        read_blocks(DIRECTORY_INDICIE, calculateNumberOfBlocksNeeded(sizeof(directoryCache)), temporaryData);
-//        memcpy(theDirectoryCache, temporaryData, sizeof(directoryCache));
-//        free(temporaryData);
-//
-//        if (theBitMapBlock == NULL) {
-//            theBitMapBlock = calloc(1, sizeof(bitmapBlock));
-//        }
-//        temporaryData = calloc(1,calculateSizeNeeded(sizeof(bitmapBlock)));
-//        read_blocks(FREE_BIT_MAP_INDICIE, calculateNumberOfBlocksNeeded(sizeof(bitmapBlock)), temporaryData);
-//        memcpy(theBitMapBlock, temporaryData, sizeof(bitmapBlock));
-//        free(temporaryData);
     if(checkIfPointerToIndirectBlockIsEmpty(theINodeTable, INodeIndex) < 1) {
         printf("%d\n", theINodeTable->table[INodeIndex].indirectINodePointer);
         for(int i = 0; i<10; i++){
@@ -572,9 +455,7 @@ int sfs_fwrite(int fileID, char *buf, int length){
         write_blocks(DATA_INDICIE+theINodeTable->table[INodeIndex].indirectINodePointer, 1, theIndirectBlock);
     }
 
-//    if(theINodeTable == NULL) {
-//        theINodeTable=calloc(1, sizeof(INodeTable));
-//    }
+
     void *temporaryData;
 
     temporaryData=calloc(1,calculateSizeNeeded(sizeof(INodeTable)));
@@ -606,7 +487,6 @@ int sfs_fwrite(int fileID, char *buf, int length){
     printf("Number of Bytes Written: %d \n", bytesWrittenCounter);
 
     return bytesWrittenCounter;
-
 
 
 }
@@ -705,8 +585,8 @@ int sfs_fread(int fileID, char *buf, int length){
         readPointerLocation += amountThatCanBeReadInSingleIteration;
 
 
-
     }
+
     free(temporaryData);
     printf("readcount: %d \n", readCount);
     printf("INodeSize kk = %d\n", theINodeTable->table[INodeIndex].size );
@@ -750,6 +630,7 @@ int sfs_remove(char *file){
                     theIndirectBlock->indirectPointers[i] = NOT_DEFINED;
                 }
                 else {
+                    theIndirectBlock->indirectPointers[i] = NOT_DEFINED;
                     printf(" \n Warning Stack Corrupted \n");
                 }
             }
@@ -758,10 +639,6 @@ int sfs_remove(char *file){
 
     eraseAllINodeBlockPointerData(theINodeTable, theBitMapBlock, pointerToInode);
 
-
-
-
-    // **
     setPosistionInInodeTableToOpen(theINodeTable, pointerToInode);
     setNewINode(&theINodeTable->table[pointerToInode]);
 

@@ -30,7 +30,7 @@ typedef struct inode {
 }INode;
 
 typedef struct indirectblock {
-    int indirectPointers[NUMBER_OF_INODE_DIRECT_POINTERS];
+    int indirectPointers[NUMBER_OF_INODE_INDIRECT_POINTERS];
 } indirectBlock;
 
 

@@ -176,6 +176,9 @@ int test_difficult_read_files(int *file_id, int *file_size, int *write_ptr, char
     write_buf[index][write_ptr[index]] = '\0';
     if(strcmp(buf, write_buf[index] + sizeof(char) * (write_ptr[index] - read_length)) != 0){
         fprintf(stderr, "Error: \nRead failed\n");
+        printf("FAils here\n\n\n");
+        printf("This is what it should have read: %s\n\n", (write_buf[index] + sizeof(char) * (write_ptr[index] - read_length)));
+        printf("This is what it actually read: %s\n\n", buf);
         *err_no += 1;
     }
     write_buf[index][write_ptr[index]] = temp;
@@ -218,6 +221,9 @@ int test_random_read_files(int *file_id, int *file_size, int *write_ptr, char **
     write_buf[i][start_index + read_length] = '\0';
     if(strcmp(buf, write_buf[i] + sizeof(char) * (start_index)) != 0){
       fprintf(stderr, "Error: \nRead failed\n");
+        printf("nah fails here\n");
+        printf("This is what should have been printed: %s\n\n", (write_buf[i] + sizeof(char) * (start_index)) );
+        printf("This is what actually printed: %s\n\n", buf);
       *err_no += 1;
     }
     write_buf[i][start_index + read_length] = temp;
@@ -239,10 +245,12 @@ int test_difficult_write_files(int *file_id, int *file_size, int *write_ptr, cha
   int rand_offset;
   for(int i = 0; i < num_file; i++){
     //Offset is how much we decrease the write pointer
-    if(file_size[i] > 1)
+    if(file_size[i] > 1){
         rand_offset = (rand()%file_size[i]);
-    else
+        printf("\n\nrandom offeset \n \n");}
+    else {
         rand_offset = 0;
+        printf("\n \n no random offset \n \n");}
     //We want the size to mostly increase so we'll load the dice so to speak. 
     //More likely the file will increase instead of getting the write pointer shifted a lot. 
     if(rand_offset > file_size[i]/3 && (rand() % 100) > 30)

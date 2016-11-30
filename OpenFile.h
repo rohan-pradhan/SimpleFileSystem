@@ -78,13 +78,21 @@ void SetSlotInOpenFileTableToNotInUse(openFileTable *fdTable, int index){
 
 }
 
-short checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){
+int checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){
     int i;
     for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
         if(fdTable->table[i].INode == someINode)
             return TRUE;
     }
     return FALSE;
+}
+
+int checkIfFileIDIsOpen(openFileTable *fdTable, int fileID) {
+    if (fdTable->slotInformationTable[fileID] == 1) {
+        return  TRUE;
+    } else {
+        return FALSE;
+    }
 }
 
 //int returnIndexOfINodeFromOpenFileTable(openFileTable fdTable, int someINode) {
