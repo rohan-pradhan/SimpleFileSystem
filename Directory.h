@@ -1,6 +1,6 @@
-//
-// Created by Rohan Pradhan on 11/23/16.
-//
+//Rohan N. Pradhan
+//COMP 310 - Simple File System
+//Student ID: 260613559
 
 #ifndef ASSIGNMENT_3_DIRECTORY_H
 #define ASSIGNMENT_3_DIRECTORY_H
@@ -21,21 +21,21 @@ typedef struct directorycache {
 
 } directoryCache;
 
-int validateFileName(char *input){
+int validateFileName(char *input){ //validates the filename to strucutre specified
     int fileNameCounter = 0;
     while(input[fileNameCounter] != '.'){
         fileNameCounter++;
     }
-    if (fileNameCounter>16 || fileNameCounter<1) {
-        return FALSE;
+    if (fileNameCounter>16 || fileNameCounter<1) { // checks if we have 16 or less chars before period
+        return FALSE; // error
     }
     else {
         int extensionCounter=fileNameCounter+1;
         while(input[extensionCounter] != '\0'){
             extensionCounter++;
         }
-        if(extensionCounter - (fileNameCounter+1) > 3 || extensionCounter - (fileNameCounter+1) < 1)
-            return FALSE;
+        if(extensionCounter - (fileNameCounter+1) > 3 || extensionCounter - (fileNameCounter+1) < 1) // checks if we only have up to 3 chars after the period
+            return FALSE; // error
         else {
             return TRUE;
         }
@@ -43,64 +43,65 @@ int validateFileName(char *input){
     }
 }
 
-int findIndexOfFileInDirectory(directoryCache *theDirectoryCache, char *fileName) {
+int findIndexOfFileInDirectory(directoryCache *theDirectoryCache, char *fileName) { //loops through directory to find the index of file
     int i;
     for(i=0; i< 40; i++) {
         if( strcmp(theDirectoryCache->theDirectory[i].fileName, fileName) == 0) {
-            return i;
+            return i; //success
         }
     }
-    return -1;
+    return -1; // file not found  error
 }
 
-void incrementPosistionInDirectory(directoryCache *theDirectoryCache) {
+void incrementPosistionInDirectory(directoryCache *theDirectoryCache) { //increment where we are in the directory (for get next file)
     theDirectoryCache->posistionInDirectory++;
 
 }
 
-int checkIfPosistionInDirectoryIsUsed(directoryCache *theDirectoryCache, int index) {
+int checkIfPosistionInDirectoryIsUsed(directoryCache *theDirectoryCache, int index) { //check if the spot in the directory is actually used
     if(theDirectoryCache->fileUsed[index] == TRUE)
         return TRUE;
     else
         return FALSE;
 }
 
-int checkIfPosistionIndDirectoryIsOpen(directoryCache *theDirectoryCache, int index) {
+int checkIfPosistionIndDirectoryIsOpen(directoryCache *theDirectoryCache, int index) { // check if the spot in the directory is open for use
     if(theDirectoryCache->fileUsed[index] == FALSE)
         return TRUE;
     else
         return FALSE;
 }
 
-int getIndexOfNextOpenSpotInDirectory(directoryCache *theDirectoryCache) {
+int getIndexOfNextOpenSpotInDirectory(directoryCache *theDirectoryCache) { // find the next open spot in the directory
     int currentIndexOfPointer = theDirectoryCache->posistionInDirectory;
     int i =0;
-    while((currentIndexOfPointer+i)<=40){
+    while((currentIndexOfPointer+i)<=40){ // loop through the directory
         int adjustedPointer = (currentIndexOfPointer +i) % 40;
         if(checkIfPosistionIndDirectoryIsOpen(theDirectoryCache, adjustedPointer) == TRUE)
-            return adjustedPointer;
+            return adjustedPointer; // success
         else
             i++;
     }
+    return -1; // no spots left
 }
 
-void markCurrentPosistionInDirectoryAsOpen(directoryCache *theDirectoryCache) {
+void markCurrentPosistionInDirectoryAsOpen(directoryCache *theDirectoryCache) { //mark the current posistion in directory as open
     int currentIndexOfPointer = theDirectoryCache->posistionInDirectory;
     theDirectoryCache->fileUsed[currentIndexOfPointer] = FALSE;
 }
 
-void markCurrentPosistionInDirectoryAsUsed(directoryCache *theDirectoryCache) {
+void markCurrentPosistionInDirectoryAsUsed(directoryCache *theDirectoryCache) { // mark the current posistion in directory as used
     int currentIndexOfPointer = theDirectoryCache->posistionInDirectory;
     theDirectoryCache->fileUsed[currentIndexOfPointer] = TRUE;
 }
 
-void markSpecificPosistionInDirectoryAsOpen(directoryCache *theDirectoryCache, int index) {
+void markSpecificPosistionInDirectoryAsOpen(directoryCache *theDirectoryCache, int index) { // mark a specific posistion in the directory as open
     int adjustedIndex = index % 40;
     theDirectoryCache->fileUsed[adjustedIndex] = FALSE;
 
 }
 
-void markSpecificPosistionInDirectoryAsUsed(directoryCache *theDirectoryCache, int index) {
+void markSpecificPosistionInDirectoryAsUsed(directoryCache *theDirectoryCache, int index) { // mark a specific posistion in the directory as used
     int adjustedIndex = index % 40;
     theDirectoryCache->fileUsed[adjustedIndex] = TRUE;
 }

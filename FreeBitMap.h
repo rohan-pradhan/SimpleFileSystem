@@ -1,6 +1,6 @@
-//
-// Created by Rohan Pradhan on 11/23/16.
-//
+//Rohan N. Pradhan
+//COMP 310 - Simple File System
+//Student ID: 260613559
 
 #ifndef ASSIGNMENT_3_FREEBITMAP_H
 #define ASSIGNMENT_3_FREEBITMAP_H
@@ -11,11 +11,11 @@ static const int NUMBER_OF_FREE_BLOCKS = NUMBER_OF_BLOCKS - DATA_INDICIE;
 
 typedef struct bitmapblock {
     short block[NUMBER_OF_FREE_BLOCKS];
-   // short blockInUse;
+
 
 } bitmapBlock;
 
-int findFreeBit(bitmapBlock *someBitMapBlock) {
+int findFreeBit(bitmapBlock *someBitMapBlock) { // find the next free bit in the free bit map block
     int i =0;
 
     while(i < NUMBER_OF_FREE_BLOCKS)
@@ -25,18 +25,12 @@ int findFreeBit(bitmapBlock *someBitMapBlock) {
         else
             i++;
     }
-    return -1;
+    return -1; // no spots left
 
 
 
 
 }
 
-//setToInUse(index, *bitmapblock){
-//    bitmapBlock[index] = 1
-//}
-//
-//
-//int
 
 #endif //ASSIGNMENT_3_FREEBITMAP_H

@@ -104,7 +104,7 @@ int test_read_all_files(int *file_id, int *file_size, char **write_buf, int num_
     }
       printf("Should have read all: %s\n", write_buf[i]);
       printf("Actually read all: %s\n", buf);
-      printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
+     // printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
   }
   free(buf);
   printf("\n-------------------------------\nTest_num[%d]: Current Error Num: %d\n--------------------------------\n\n", test_num, *err_no);
@@ -130,7 +130,7 @@ int test_simple_read_files(int *file_id, int *file_size, char **write_buf, int n
     }
       printf("This is what simple read should have read: %s\n", test_str);
       printf("This is what simple read actually read: %s\n", buf);
-      printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
+      //printf("%d %d %d\n", strlen(buf), strlen(write_buf[i]), file_size[i]);
   }
   printf("\n-------------------------------\nTest_num[%d]: Current Error Num: %d\n--------------------------------\n\n", test_num, *err_no);
   test_num++;
@@ -149,7 +149,7 @@ int test_simple_write_files(int *file_id, int *file_size, int *write_ptr, char *
     if(write_ptr[i] > file_size[i])
       file_size[i] = write_ptr[i];
     write_buf[i][file_size[i]] = '\0';
-      printf("\nAddress of FileID[0] = %d\n", &(file_id[0]));
+    //  printf("\nAddress of FileID[0] = %d\n", &(file_id[0]));
       printf("\nFildID[%d] = %d\n", i, file_id[i]);
     res = sfs_fwrite(file_id[i], test_str, strlen(test_str));
     if(res != strlen(test_str))

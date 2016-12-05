@@ -33,54 +33,9 @@
       <file leaf-file-name="tests.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="249" column="20" selection-start-line="249" selection-start-column="20" selection-end-line="249" selection-end-column="34" />
+            <state relative-caret-position="-6330">
+              <caret line="151" column="6" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="6" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sfs_test2.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sfs_test2.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="79" column="35" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sfs_test1.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sfs_test1.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="51" column="8" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataSize.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataSize.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="74" selection-end-column="3" />
-              <folding>
-                <element signature="e#112#131#0" expanded="true" />
-                <marker date="1480544252000" expanded="true" signature="1845:2513" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sfs_api.c" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sfs_api.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -88,28 +43,18 @@
       <file leaf-file-name="Directory.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Directory.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SuperBlock.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SuperBlock.h">
+      <file leaf-file-name="OpenFile.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/OpenFile.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="disk_emu.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/disk_emu.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1425">
-              <caret line="100" column="5" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+            <state relative-caret-position="1635">
+              <caret line="109" column="134" selection-start-line="109" selection-start-column="134" selection-end-line="109" selection-end-column="134" />
               <folding />
             </state>
           </provider>
@@ -118,22 +63,24 @@
       <file leaf-file-name="INode.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/INode.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="146" column="21" selection-start-line="146" selection-start-column="21" selection-end-line="146" selection-end-column="21" />
+            <state relative-caret-position="2205">
+              <caret line="147" column="119" selection-start-line="147" selection-start-column="119" selection-end-line="147" selection-end-column="119" />
               <folding>
-                <element signature="e#106#125#0" expanded="true" />
-                <element signature="e#444#470#0" expanded="true" />
+                <element signature="e#134#153#0" expanded="true" />
+                <element signature="e#472#498#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OpenFile.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/OpenFile.h">
+      <file leaf-file-name="DataSize.h" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/DataSize.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="90" column="51" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
-              <folding />
+            <state relative-caret-position="690">
+              <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
+              <folding>
+                <element signature="e#140#159#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -145,19 +92,19 @@
       <list>
         <option value="$PROJECT_DIR$/OpenFileTable.h" />
         <option value="$PROJECT_DIR$/BoolConstants.h" />
-        <option value="$PROJECT_DIR$/FreeBitMap.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/disk_emu.c" />
         <option value="$PROJECT_DIR$/sfs_test1.c" />
-        <option value="$PROJECT_DIR$/SuperBlock.h" />
         <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/sfs_test2.c" />
-        <option value="$PROJECT_DIR$/Directory.h" />
-        <option value="$PROJECT_DIR$/INode.h" />
-        <option value="$PROJECT_DIR$/OpenFile.h" />
         <option value="$PROJECT_DIR$/tests.c" />
-        <option value="$PROJECT_DIR$/DataSize.h" />
         <option value="$PROJECT_DIR$/sfs_api.c" />
+        <option value="$PROJECT_DIR$/DataSize.h" />
+        <option value="$PROJECT_DIR$/Directory.h" />
+        <option value="$PROJECT_DIR$/SuperBlock.h" />
+        <option value="$PROJECT_DIR$/INode.h" />
+        <option value="$PROJECT_DIR$/FreeBitMap.h" />
+        <option value="$PROJECT_DIR$/OpenFile.h" />
       </list>
     </option>
   </component>
@@ -168,9 +115,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="99" />
-    <option name="width" value="1171" />
-    <option name="height" value="872" />
+    <option name="width" value="1440" />
+    <option name="height" value="900" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -207,6 +153,7 @@
     <property name="js-jscs-nodeInterpreter" value="/usr/local/bin/node" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Custom" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunManager" selected="Application.Assignment_3">
     <configuration default="true" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Assignment_3" TARGET_NAME="Assignment_3" CONFIG_NAME="Debug" TEST_MODE="SUITE_TEST">
@@ -387,23 +334,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1479838175964</updated>
-      <workItem from="1479838177347" duration="140559000" />
+      <workItem from="1479838177347" duration="149370000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140559000" />
+    <option name="totallyTimeSpent" value="149370000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="99" y="0" width="1171" height="872" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21319444" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942554" sideWeight="0.49722221" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05603985" sideWeight="0.5081127" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.05603985" sideWeight="0.49188727" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.052754983" sideWeight="0.5076389" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.052754983" sideWeight="0.4923611" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -452,17 +399,13 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/sfs_api.c</url>
-          <line>152</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/INode.h</url>
           <line>29</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/sfs_api.c</url>
-          <line>104</line>
+          <line>106</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
@@ -553,17 +496,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FreeBitMap.h">
+    <entry file="file://$PROJECT_DIR$/sfs_api.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="23" />
+          <folding>
+            <element signature="e#76#94#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sfs_test1.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
+        <state relative-caret-position="48">
           <caret line="51" column="8" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="8" />
           <folding />
         </state>
@@ -577,34 +522,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/OpenFile.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="90" column="51" selection-start-line="90" selection-start-column="51" selection-end-line="90" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="249" column="20" selection-start-line="249" selection-start-column="20" selection-end-line="249" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Directory.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
+        <state relative-caret-position="-6330">
+          <caret line="151" column="6" selection-start-line="151" selection-start-column="6" selection-end-line="151" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SuperBlock.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
+        <state relative-caret-position="30">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
           <folding />
         </state>
       </provider>
@@ -617,34 +546,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Directory.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="2" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FreeBitMap.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/OpenFile.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1635">
+          <caret line="109" column="134" selection-start-line="109" selection-start-column="134" selection-end-line="109" selection-end-column="134" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/INode.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="146" column="21" selection-start-line="146" selection-start-column="21" selection-end-line="146" selection-end-column="21" />
+        <state relative-caret-position="2205">
+          <caret line="147" column="119" selection-start-line="147" selection-start-column="119" selection-end-line="147" selection-end-column="119" />
           <folding>
-            <element signature="e#106#125#0" expanded="true" />
-            <element signature="e#444#470#0" expanded="true" />
+            <element signature="e#134#153#0" expanded="true" />
+            <element signature="e#472#498#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/DataSize.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="2" selection-end-line="74" selection-end-column="3" />
+        <state relative-caret-position="690">
+          <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding>
-            <element signature="e#112#131#0" expanded="true" />
-            <marker date="1480544252000" expanded="true" signature="1845:2513" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sfs_api.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#140#159#0" expanded="true" />
           </folding>
         </state>
       </provider>

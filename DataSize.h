@@ -1,12 +1,12 @@
-//
-// Created by Rohan Pradhan on 11/23/16.
-//
+//Rohan N. Pradhan
+//COMP 310 - Simple File System
+//Student ID: 260613559
 
 #ifndef ASSIGNMENT_3_DATASIZE_H
 #define ASSIGNMENT_3_DATASIZE_H
 #include <stddef.h>
 #include "SuperBlock.h"
-int calculateNumberOfBlocksNeeded(size_t input) {
+int calculateNumberOfBlocksNeeded(size_t input) { // calculate how many blocks we will need
    int returnVal;
     returnVal = (input + (BLOCK_SIZE-1))/BLOCK_SIZE;
 //    printf("Input Blocks: %d\n", input);
@@ -15,7 +15,7 @@ int calculateNumberOfBlocksNeeded(size_t input) {
     return returnVal;
 }
 
-int calculateSizeNeeded(size_t input) {
+int calculateSizeNeeded(size_t input) { //calculate how much size required in blocks
     int x;
     x = calculateNumberOfBlocksNeeded(input);
     int returnVal;
@@ -26,11 +26,11 @@ int calculateSizeNeeded(size_t input) {
 
 }
 
-int calculateWhichBlock(int dataByte) {
+int calculateWhichBlock(int dataByte) { // calculate which block (not adjusted for indirect)
     return dataByte / BLOCK_SIZE;
 }
 
-short checkIfWeAreIncreasingSizeOfFile(INodeTable *someINodeTable, int someWritePointer, int someLength, int someINodePointer){
+short checkIfWeAreIncreasingSizeOfFile(INodeTable *someINodeTable, int someWritePointer, int someLength, int someINodePointer){ //check if we are increasing the size of file
     if(someWritePointer + someLength > someINodeTable->table[someINodePointer].size) {
         return TRUE;
     }
@@ -38,7 +38,7 @@ short checkIfWeAreIncreasingSizeOfFile(INodeTable *someINodeTable, int someWrite
         return FALSE;
 }
 
-int findCorrespondingDataBlockPointerToDisk(INodeTable *someINodeTable, int someINodeIndex, int someBlockNumber) {
+int findCorrespondingDataBlockPointerToDisk(INodeTable *someINodeTable, int someINodeIndex, int someBlockNumber) { //return which data pointer
     if (someBlockNumber < 0) {
         printf("\n SomeBlockNumber is less than 1 \n %d", someBlockNumber);
         return -1;
@@ -53,7 +53,7 @@ int findCorrespondingDataBlockPointerToDisk(INodeTable *someINodeTable, int some
         printf("\n value returned: %d", someINodeTable->table[someINodeIndex].iNodePointers[someBlockNumber]);
         return someINodeTable->table[someINodeIndex].iNodePointers[someBlockNumber];
     }
-    // ADD INDIRECT BP LATER
+   return -1;
 }
 
 

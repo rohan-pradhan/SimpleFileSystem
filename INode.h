@@ -1,6 +1,6 @@
-//
-// Created by Rohan Pradhan on 11/22/16.
-//
+//Rohan N. Pradhan
+//COMP 310 - Simple File System
+//Student ID: 260613559
 
 #ifndef ASSIGNMENT_3_INODE_H
 #define ASSIGNMENT_3_INODE_H
@@ -34,21 +34,7 @@ typedef struct indirectblock {
 } indirectBlock;
 
 
-
-void copyINodeInformation(INode *original, INode *copy) {
-    copy->mode = original->mode;
-    copy->linkCnt = original->linkCnt;
-    copy->uid = original->uid;
-    copy->gid = original->gid;
-    copy->size = original->size;
-    for (int i = 0; i <NUMBER_OF_INODE_DIRECT_POINTERS; i++){
-        copy->iNodePointers[i] = original->iNodePointers[i];
-    }
-    copy->indirectINodePointer = original->indirectINodePointer;
- }
-
-
-void setNewINode(INode* INodeToSetup) {
+void setNewINode(INode* INodeToSetup) { //set up a new inode (essentially set everything to zero)
     INodeToSetup->mode = 0;
     INodeToSetup->linkCnt = 0;
     INodeToSetup->uid = 0;
@@ -56,11 +42,11 @@ void setNewINode(INode* INodeToSetup) {
     INodeToSetup->size = 0;
 
     int i = 0;
-    while (i <= NUMBER_OF_INODE_DIRECT_POINTERS && INodeToSetup->iNodePointers[i] != -1) {
-        INodeToSetup->iNodePointers[i] = -1;
+    while (i <= NUMBER_OF_INODE_DIRECT_POINTERS && INodeToSetup->iNodePointers[i] != -1) { // set the direct pointers to not defined
+        INodeToSetup->iNodePointers[i] = NOT_DEFINED;
         i++;
     }
-    INodeToSetup->indirectINodePointer = -1;
+    INodeToSetup->indirectINodePointer = NOT_DEFINED;
 
 }
 
@@ -71,68 +57,56 @@ typedef struct inodeTable {
 } INodeTable;
 
 
-short checkIfPosistionInINodeTableIsOpen(INodeTable *table, int index) {
+short checkIfPosistionInINodeTableIsOpen(INodeTable *table, int index) { //check if posistion in table is open
     if(table->usedTable[index] == FALSE)
         return TRUE;
     else
         return FALSE;
 }
 
-short checkIfPosistionInINodeTableIsUsed(INodeTable *table, int index){
+short checkIfPosistionInINodeTableIsUsed(INodeTable *table, int index){ // check if posistion in table is used
     if(table->usedTable[index] == TRUE)
         return TRUE;
     else
         return FALSE;
 }
 
-int getIndexOfNextOpenSpotInINodeTable(INodeTable *table) {
+int getIndexOfNextOpenSpotInINodeTable(INodeTable *table) { // get the next open spot in the INodeTable
     int i;
     for(i = 0; i < NUMBER_OF_INODES; i++) {
         if(checkIfPosistionInINodeTableIsOpen(table,i) == TRUE)
             return i;
     }
-    return NOT_DEFINED;
+    return NOT_DEFINED; // error no more spots left
 
 }
 
-void setPosistionInInodeTableToOpen(INodeTable *table, int index) {
+void setPosistionInInodeTableToOpen(INodeTable *table, int index) { //set spot open in table
     table->usedTable[index] = FALSE;
 }
 
-void setPosistionInInodeTableToUsed(INodeTable *table, int index) {
+void setPosistionInInodeTableToUsed(INodeTable *table, int index) { //set spot to used in table
     table->usedTable[index] = TRUE;
 }
 
-void eraseAllINodeBlockPointerData(INodeTable *theTable, bitmapBlock *thebitMapBlock, int index) {
+void eraseAllINodeBlockPointerData(INodeTable *theTable, bitmapBlock *thebitMapBlock, int index) { // erase all information in table
     int i;
 
     for(i=0; i < NUMBER_OF_INODE_DIRECT_POINTERS; i++) {
-        if(theTable->table[index].iNodePointers[i] != NOT_DEFINED){
+        if(theTable->table[index].iNodePointers[i] != NOT_DEFINED){ //set pointers to undefined
             void *temporaryData = calloc(1, BLOCK_SIZE);
-            write_blocks(DATA_INDICIE+theTable->table[index].iNodePointers[i], 1, temporaryData);
+            write_blocks(DATA_INDICIE+theTable->table[index].iNodePointers[i], 1, temporaryData); //flush to disk
             free(temporaryData);
-            thebitMapBlock->block[theTable->table[index].iNodePointers[i]] = FALSE;
-            theTable->table[index].iNodePointers[i] = NOT_DEFINED;
+            thebitMapBlock->block[theTable->table[index].iNodePointers[i]] = FALSE; //free up space in free bit map block
+            theTable->table[index].iNodePointers[i] = NOT_DEFINED; // free up space in the INodeTable
         }
     }
 
-//   // INodeIndirectPointer *theIndirectPointer = NULL;
-//    //theIndirectPointer = (1, sizeof(INodeIndirectPointer));
-//    INodeIndirectPointer theIndirectPointer = {};
-//    //int x = theTable->table[index].indirectINodePointer;
-//    //printf("Value of indirect ptr: %d", x);
-//    read_blocks(DATA_INDICIE+theTable->table[index].indirectINodePointer, 1, &theIndirectPointer);
-//   // memcpy(theIndirectPointer, theTable->table[index].indirectINodePointer, sizeof(INodeIndirectPointer));
-//
-//    for(i=0; i< NUMBER_OF_INODE_DIRECT_POINTERS; i++) {
-//
-//    }
-
-    setPosistionInInodeTableToOpen(theTable, index);
+    setPosistionInInodeTableToOpen(theTable, index); // set posisition to open
     setNewINode(&theTable->table[index]);
 }
 
-short checkIfDataPointerIsEmptyInINode(INodeTable *someINodeTable, int indexInTable, int dataPointerInINode){
+short checkIfDataPointerIsEmptyInINode(INodeTable *someINodeTable, int indexInTable, int dataPointerInINode){ //check if the data pointer in a specific INode is empty
     if (someINodeTable->table[indexInTable].iNodePointers[dataPointerInINode] <0){
         return TRUE;
     }
@@ -140,21 +114,21 @@ short checkIfDataPointerIsEmptyInINode(INodeTable *someINodeTable, int indexInTa
         return FALSE;
 }
 
-int checkIfPointerIsInIndirectBlock(int index) {
+int checkIfPointerIsInIndirectBlock(int index) { // check if block pointer is in the indirect block
     if (index >= NUMBER_OF_INODE_DIRECT_POINTERS)
         return TRUE;
     else
         return FALSE;
 }
 
-int calculateWhichIndirectBlock(int index) {
+int calculateWhichIndirectBlock(int index) { // calculate which indirect block it is in
     if (checkIfPointerIsInIndirectBlock(index) == FALSE)
         return -1;
     else
         return index - NUMBER_OF_INODE_DIRECT_POINTERS;
 }
 
-int checkIfPointerToIndirectBlockIsEmpty(INodeTable *someINodeTable, int indexInTable) {
+int checkIfPointerToIndirectBlockIsEmpty(INodeTable *someINodeTable, int indexInTable) { //check if the pointer to the indirect block pointer is null
     if(someINodeTable->table[indexInTable].indirectINodePointer < 1) {
         return TRUE;
     }
@@ -163,7 +137,7 @@ int checkIfPointerToIndirectBlockIsEmpty(INodeTable *someINodeTable, int indexIn
     }
 }
 
-int checkIfIndirectDataPointerIsEmpty(indirectBlock *someIndirectBlock, int indexInTable){
+int checkIfIndirectDataPointerIsEmpty(indirectBlock *someIndirectBlock, int indexInTable){ //check if the pointer to disk from the indirect block pointer is null
     if(someIndirectBlock->indirectPointers[indexInTable] < 1 ){
         return TRUE;
     } else {
@@ -171,7 +145,7 @@ int checkIfIndirectDataPointerIsEmpty(indirectBlock *someIndirectBlock, int inde
     }
 }
 
-int testForStackCorruption(indirectBlock *someIndirectBlock, int indexInTable){
+int testForStackCorruption(indirectBlock *someIndirectBlock, int indexInTable){ // test for overwrites stack corruption
     if(someIndirectBlock->indirectPointers[indexInTable] > NUMBER_OF_BLOCKS) {
         return TRUE;
     }

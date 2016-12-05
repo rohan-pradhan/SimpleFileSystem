@@ -1,6 +1,6 @@
-//
-// Created by Rohan Pradhan on 11/22/16.
-//
+//Rohan N. Pradhan
+//COMP 310 - Simple File System
+//Student ID: 260613559
 
 #include "INode.h"
 
@@ -25,21 +25,20 @@ typedef struct openfiletable{
 
 } openFileTable;
 
-int getNextOpenSpotInFileDescriptorTable(openFileTable * fdTable){
+int getNextOpenSpotInFileDescriptorTable(openFileTable * fdTable){ // find the next spot in the open file table
 
     for (int i =0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
         printf("%d\n", i);
-        printf("fdtable: kk %d\n", fdTable);
 
         if (fdTable->slotInformationTable[i] == NOT_IN_USE)
 
             return i;
     }
-    return -1; // Means there are no free file descriptors in the table
+    return -1; // Means there are no free file descriptors in the table error
 
 }
 
-int checkIfSlotIsInUse(openFileTable *fdTable, int tableIndex) {
+int checkIfSlotIsInUse(openFileTable *fdTable, int tableIndex) { //check if the slot is in use
     if (fdTable->slotInformationTable[tableIndex] == IN_USE){
         return TRUE;
     }
@@ -48,7 +47,7 @@ int checkIfSlotIsInUse(openFileTable *fdTable, int tableIndex) {
     }
 }
 
-int checkIfSlotIsNotInUse(openFileTable *fdTable, int tableIndex) {
+int checkIfSlotIsNotInUse(openFileTable *fdTable, int tableIndex) { // check if the slot is not in use
     if (fdTable->slotInformationTable[tableIndex] == NOT_IN_USE){
         return TRUE;
     }
@@ -57,7 +56,7 @@ int checkIfSlotIsNotInUse(openFileTable *fdTable, int tableIndex) {
     }
 }
 
-void SetSlotInOpenFileTableToInUse(openFileTable *fdTable, int index) {
+void SetSlotInOpenFileTableToInUse(openFileTable *fdTable, int index) { //set a certain slot to in use
     if (index > MAX_NUMBER_OF_OPEN_FILES || index < 0)
         return; //failed
     else
@@ -65,7 +64,7 @@ void SetSlotInOpenFileTableToInUse(openFileTable *fdTable, int index) {
          //successful
 }
 
-void SetSlotInOpenFileTableToNotInUse(openFileTable *fdTable, int index){
+void SetSlotInOpenFileTableToNotInUse(openFileTable *fdTable, int index){ // set a certain slot to not in use
     if (index > MAX_NUMBER_OF_OPEN_FILES || index < 0)
         return;
     else {
@@ -78,7 +77,7 @@ void SetSlotInOpenFileTableToNotInUse(openFileTable *fdTable, int index){
 
 }
 
-int checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){
+int checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){ // check if an INode is actually in the open file table
     int i;
     for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
         if(fdTable->table[i].INode == someINode)
@@ -87,7 +86,7 @@ int checkIfINodeIsInOpenFileTable(openFileTable *fdTable, int someINode){
     return FALSE;
 }
 
-int checkIfFileIDIsOpen(openFileTable *fdTable, int fileID) {
+int checkIfFileIDIsOpen(openFileTable *fdTable, int fileID) { // check if a certain file ID is actually open
     if (fdTable->slotInformationTable[fileID] == 1) {
         return  TRUE;
     } else {
@@ -95,23 +94,8 @@ int checkIfFileIDIsOpen(openFileTable *fdTable, int fileID) {
     }
 }
 
-//int returnIndexOfINodeFromOpenFileTable(openFileTable fdTable, int someINode) {
-//    int i;
-//    for(i=0; i<MAX_NUMBER_OF_OPEN_FILES; i++){
-////        printf("The someInode is: %d\n", someINode);
-////        printf("The Inode in table is: %d\n", fdTable.table[i].INode);
-//        //int testVal = fdTable.table[i].INode;
-//        if(fdTable.table[i].INode == someINode); {
-//            //printf("value of testval = %d and value of someInode = %d\n",testVal, someINode);
-//            //printf("Going to return now!\n");
-//            return i;
-//        }
-//    }
-//    return -1;
-//}
 
-
-int getIndexOfOpenFileTableForINode(openFileTable table, int iNodeIndex) {
+int getIndexOfOpenFileTableForINode(openFileTable table, int iNodeIndex) { //return the Index in the open file table for a certain INode
     int i;
     for (i = 0; i < MAX_NUMBER_OF_OPEN_FILES; i++) {
         if (table.table[i].INode == iNodeIndex) {
@@ -123,7 +107,7 @@ int getIndexOfOpenFileTableForINode(openFileTable table, int iNodeIndex) {
     return -1;
 }
 
-void removeDataFromSlotInOpenFileTable(openFileTable *fdTable, int index) {
+void removeDataFromSlotInOpenFileTable(openFileTable *fdTable, int index) { //remove information from the open file table (for remove)
     fdTable->table[index].INode = NOT_DEFINED;
     fdTable->table[index].readPointer = NOT_DEFINED;
     fdTable->table[index].writePointer = NOT_DEFINED;

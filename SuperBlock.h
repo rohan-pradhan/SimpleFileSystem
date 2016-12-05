@@ -1,6 +1,6 @@
-//
-// Created by Rohan Pradhan on 11/22/16.
-//
+//Rohan N. Pradhan
+//COMP 310 - Simple File System
+//Student ID: 260613559
 
 #ifndef ASSIGNMENT_3_SUPERBLOCK_H
 #define ASSIGNMENT_3_SUPERBLOCK_H
